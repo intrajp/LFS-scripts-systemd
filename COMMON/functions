@@ -1,0 +1,96 @@
+############################################################################################
+# Pink Rabbit Linux 8.1
+ 
+# Copyright(C)2016-2017 Shintaro Fujiwara
+# All rights reserved.
+ 
+# Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution
+# Just run scripts and you can make your own Linux Distribution.
+
+# This version is based on Linux From Scratch: Version 8.1-systemd
+# which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K.
+
+# # Copyright © 1999-2017, Gerard Beekman
+# This Distribution is licensed under a Creative Commons License.
+# Computer instructions may be extracted from this Distribution under the MIT License.
+# Linux® is a registered trademark of Linus Torvalds
+############################################################################################
+##-- functions for LFS --
+#
+
+. config
+## this function asks yes or no, if no, exit 1
+
+yes_or_no()
+{
+  while true
+    ANS=""
+    echo -n "[yes|no]"
+    read ANS
+      do
+        if [ "$ANS" = "yes" ];then
+          break 
+        elif [ "$ANS" = "no" ];then  
+          `kill -KILL $PID`
+          exit 1
+        else
+          echo -n "[yes|no]"
+          read ANS
+        fi
+     done
+}
+
+## this command checks the previous command succeeded
+previous_command_succeeded()
+{
+  if [ $? -eq 0 ]; then
+    echo "command succeeded"
+  else
+    echo "command failed"
+    exit 1
+  fi
+}
+
+## this function make filesystem
+
+mkfs_for_lfs()
+{
+  ANS=""
+  echo "Type which device you want to make LFS system with type ext4."
+  echo -n "for example, sdb1, sdc1 :"
+  read DEVICE
+  echo "Are you sure making LFS system with ext4 in \"/dev/$DEVICE\" ?"
+  yes_or_no
+}
+
+## this function prepares making swap partition 
+
+mkswap_for_lfs()
+{
+  ANS2=""
+  echo "Type which device you want to make swap."
+  echo -n "for example, sdb2, sdc2 :"
+  read SWAP
+  echo "Are you sure making swap in \"/dev/$SWAP\" ?"
+  yes_or_no
+}
+
+## this function getting needed files
+
+get_needed_files()
+{
+  cp wget-list $LFS/sources
+  cp md5sums $LFS/sources
+  wget --input-file=wget-list --continue --directory-prefix=$LFS/sources
+  cp md5sums $LFS/sources
+  pushd $LFS/sources
+    md5sum -c md5sums
+  popd
+}
+
+## this function back to source directory
+
+backto_source_dir()
+{
+  cd $LFS"/sources"
+}

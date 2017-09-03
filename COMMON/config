@@ -1,0 +1,111 @@
+############################################################################################
+# Pink Rabbit Linux 8.1
+ 
+# Copyright(C)2016-2017 Shintaro Fujiwara
+# All rights reserved.
+ 
+# Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution
+# Just run scripts and you can make your own Linux Distribution.
+
+# This version is based on Linux From Scratch: Version 8.1-systemd
+# which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K.
+
+# # Copyright © 1999-2017, Gerard Beekman
+# This Distribution is licensed under a Creative Commons License.
+# Computer instructions may be extracted from this Distribution under the MIT License.
+# Linux® is a registered trademark of Linus Torvalds
+############################################################################################
+## global config 
+
+BINUTILS="binutils-2.29"
+BINUTILS_STRING="Binutils-2.29"
+
+GCC="gcc-7.2.0"
+GCC_STRING="GCC-7.2.0"
+GCC_VERSION="7.2.0"
+
+LINUX="linux-4.12.7"
+LINUX_STRING="Linux-4.12."
+
+GLIBC="glibc-2.26"
+GLIBC_STRING="GLibc-2.26"
+
+LIBSTDC="gcc-7.2.0"
+LIBSTDC_STRING="Libstdc++-7.2.0"
+
+CHECK="check-0.11.0"
+CHECK_STRING="Check-0.11.0"
+
+DEJAGNU="dejagnu-1.6"
+DEJAGNU_STRING="DejaGNU-1.6"
+
+EXPECT="expect5.45"
+EXPECT_STRING="Expect-5.45"
+
+TCL="tcl8.6.7"
+TCL_STRING="Tcl-8.6.7"
+
+NCURSES="ncurses-6.0"
+NCURSES_STRING="Ncurses-6.0"
+
+BASH="bash-4.4"
+BASH_STRING="Bash-4.4"
+
+BISON="bison-3.0.4"
+BISON_STRING="Bison-3.0.4"
+
+BZIP2="bzip2-1.0.6"
+BZIP2_STRING="Bzip2-1.0.6"
+
+COREUTILS="coreutils-8.27"
+COREUTILS_STRING="Coreutils-8.27"
+ 
+DIFFUTILS="diffutils-3.6"
+DIFFUTILS_STRING="Diffutils-3.6"
+
+FILE="file-5.31"
+FILE_STRING="File-5.31"
+
+FINDUTILS="findutils-4.6.0"
+FINDUTILS_STRING="Findutils-4.6.0"
+
+GAWK="gawk-4.1.4"
+GAWK_STRING="Gawk-4.1.4"
+
+GETTEXT="gettext-0.19.8.1"
+GETTEXT_STRING="Gettext-0.19.8.1"
+
+GREP="grep-3.1"
+GREP_STRING="Grep-3.1"
+
+GZIP="gzip-1.8"
+GZIP_STRING="Gzip-1.8"
+
+M4="m4-1.4.18"
+M4_STRING="M4-1.4.18"
+
+MAKE="make-4.2.1"
+MAKE_STRING="Make-4.2.1"
+
+PATCH="patch-2.7.5"
+PATCH_STRING="Patch-2.7.5"
+
+PERL="perl-5.26.0"
+PERL_STRING="Perl-5.26.0"
+PERL_VERSION="5.26.0"
+
+SED="sed-4.4"
+SED_STRING="Sed-4.4"
+
+TAR="tar-1.29"
+TAR_STRING="Tar-1.29"
+
+TEXINFO="texinfo-6.4"
+TEXINFO_STRING="Texinfo-6.4"
+
+UTIL_LINUX="util-linux-2.30.1"
+UTIL_LINUX_STRING="Util-linux-2.30.1"
+
+XZ="xz-5.2.3"
+XZ_STRING="Xz-5.2.3"
+
