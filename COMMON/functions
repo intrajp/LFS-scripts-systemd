@@ -17,44 +17,30 @@
 ############################################################################################
 ##-- functions for LFS --
 #
-
-. config
 ## this function asks yes or no, if no, exit 1
 
-yes_or_no()
-{
-  while true
-    ANS=""
-    echo -n "[yes|no]"
-    read ANS
-      do
-        if [ "$ANS" = "yes" ];then
-          break 
-        elif [ "$ANS" = "no" ];then  
-          `kill -KILL $PID`
-          exit 1
-        else
-          echo -n "[yes|no]"
-          read ANS
-        fi
-     done
-}
-
-## this command checks the previous command succeeded
-previous_command_succeeded()
-{
-  if [ $? -eq 0 ]; then
-    echo "command succeeded"
-  else
-    echo "command failed"
-    exit 1
-  fi
+function yes_or_no(){
+while true
+  ANS=""
+  echo -n "[yes|no]"
+  read ANS
+    do
+      if [ "$ANS" = "yes" ];then
+        #break 
+        return 
+      elif [ "$ANS" = "no" ];then  
+        `kill -KILL $PID`
+        exit 1
+      else
+        echo -n "[yes|no]"
+        read ANS
+      fi
+   done
 }
 
 ## this function make filesystem
 
-mkfs_for_lfs()
-{
+function mkfs_for_lfs(){
   ANS=""
   echo "Type which device you want to make LFS system with type ext4."
   echo -n "for example, sdb1, sdc1 :"
@@ -65,8 +51,7 @@ mkfs_for_lfs()
 
 ## this function prepares making swap partition 
 
-mkswap_for_lfs()
-{
+function mkswap_for_lfs(){
   ANS2=""
   echo "Type which device you want to make swap."
   echo -n "for example, sdb2, sdc2 :"
@@ -77,8 +62,7 @@ mkswap_for_lfs()
 
 ## this function getting needed files
 
-get_needed_files()
-{
+function get_needed_files(){
   cp wget-list $LFS/sources
   cp md5sums $LFS/sources
   wget --input-file=wget-list --continue --directory-prefix=$LFS/sources
@@ -90,7 +74,23 @@ get_needed_files()
 
 ## this function back to source directory
 
-backto_source_dir()
-{
-  cd $LFS"/sources"
+function backto_source_dir(){
+  cd ${LFS}/sources
+}
+
+## this function back to source directory (for PART3)
+
+function backto_source_dir_part3(){
+  cd /sources
+}
+
+## this command checks the previous command succeeded
+
+function previous_command_succeeded(){
+  if [ $? -eq 0 ]; then
+    echo "command succeeded"
+  else
+    echo "command failed"
+    exit 1
+  fi
 }

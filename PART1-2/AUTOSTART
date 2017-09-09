@@ -1,3 +1,4 @@
+
 ############################################################################################
 # Pink Rabbit Linux 8.1
  
@@ -15,30 +16,9 @@
 # Computer instructions may be extracted from this Distribution under the MIT License.
 # Linux® is a registered trademark of Linus Torvalds
 ############################################################################################
-Prepare a device.
 
-Small hard drive will do.
-
-Make two partitions, one should be larger than 10 Gbytes and one is larger than 1Gbytes.
-
-e.g. "fdisk /dev/sde"
-
-"n"
-"e"
-"l"
-"enter"
-"+50G"
-"..."
-"p"
-"w"
-
-Do the same thing above to make a second partition.
-
-execute ./AUTOSTART
-
-Note that making and testing GCC or Glibc procedure takes long time.
-I incorporated sources into ./sources which you might use them.
-Be patient.
-Good luck.
-
-shintaro.fujiwara@gmail.com
+#!/bin/sh
+SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
+##
+echo "##############################"
+source 1.sh | tee 1.sh.log

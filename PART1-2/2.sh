@@ -17,7 +17,9 @@ echo "Computer instructions may be extracted from this Distribution under the MI
 echo "Linux® is a registered trademark of Linus Torvalds."
 echo "############################################################################################"
 
+. config 
 . functions
+previous_command_succeeded
 
 ANS=""
 PID="$$"

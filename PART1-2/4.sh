@@ -17,7 +17,9 @@ echo "Computer instructions may be extracted from this Distribution under the MI
 echo "Linux® is a registered trademark of Linus Torvalds."
 echo "############################################################################################"
 
+. config 
 . functions
+previous_command_succeeded
 
 PID="$$"
 
@@ -30,7 +32,7 @@ echo "Are you ready to install Tcl?"
 echo
 yes_or_no
 ##
-tar -zxvf tcl-core8.6.7-src.tar.gz
+tar zxvf tcl-core8.6.7-src.tar.gz
 previous_command_succeeded
 cd ${TCL} 
 previous_command_succeeded
@@ -75,7 +77,7 @@ echo "Are you ready to install Expect?"
 echo
 yes_or_no
 ##
-tar -zxvf ${EXPECT}.tar.gz
+tar zxvf ${EXPECT}.tar.gz
 previous_command_succeeded
 cd ${EXPECT} 
 previous_command_succeeded
@@ -111,7 +113,7 @@ echo "Are you ready to install DejaGNU?"
 echo
 yes_or_no
 ##
-tar -zxvf ${DEJAGNU}.tar.gz
+tar zxvf ${DEJAGNU}.tar.gz
 previous_command_succeeded
 cd ${DEJAGNU} 
 previous_command_succeeded
@@ -138,7 +140,7 @@ echo "Are you ready to install Check?"
 echo 
 yes_or_no
 ##
-tar -zxvf ${CHECK}.tar.gz
+tar zxvf ${CHECK}.tar.gz
 previous_command_succeeded
 cd ${CHECK} 
 previous_command_succeeded
@@ -168,7 +170,7 @@ echo "Are you ready to install Ncurses?"
 echo 
 yes_or_no
 ##
-tar -zxvf ${NCURSES}.tar.gz
+tar zxvf ${NCURSES}.tar.gz
 previous_command_succeeded
 cd ${NCURSES} 
 previous_command_succeeded
@@ -205,7 +207,7 @@ echo "Are you ready to install Bash?"
 echo 
 yes_or_no
 ##
-tar -zxvf ${BASH}.tar.gz
+tar zxvf ${BASH}.tar.gz
 previous_command_succeeded
 cd ${BASH} 
 previous_command_succeeded
@@ -239,7 +241,7 @@ echo "Are you ready to install Bison ?"
 echo 
 yes_or_no
 ##
-tar -xvf ${BISON}.tar.xz
+tar xvf ${BISON}.tar.xz
 previous_command_succeeded
 cd ${BISON} 
 previous_command_succeeded
@@ -259,7 +261,7 @@ previous_command_succeeded
 rm -rf ${BISON} 
 previous_command_succeeded
 
-####5.18. ${BZIP2_STRING}
+####5.18. ${BZIP_STRING}
 ##5.18.1. Installation of Bzip2
 backto_source_dir
 previous_command_succeeded
@@ -268,9 +270,9 @@ echo "Are you ready to install Bzip2?"
 echo 
 yes_or_no
 ##
-tar -zxvf ${BZIP2}.tar.gz
+tar zxvf ${BZIP}.tar.gz
 previous_command_succeeded
-cd ${BZIP2} 
+cd ${BZIP} 
 previous_command_succeeded
 ##
 make
@@ -294,7 +296,7 @@ echo "Are you ready to install Coreutils?"
 echo 
 yes_or_no
 ##
-tar -xvf ${COREUTILS}.tar.xz
+tar xvf ${COREUTILS}.tar.xz
 previous_command_succeeded
 cd ${COREUTILS} 
 previous_command_succeeded
@@ -325,7 +327,7 @@ echo "Are you ready to install Diffutils?"
 echo 
 yes_or_no
 ##
-tar -xvf ${DIFFUTILS}.tar.xz
+tar xvf ${DIFFUTILS}.tar.xz
 previous_command_succeeded
 cd ${DIFFUTILS} 
 previous_command_succeeded
@@ -356,7 +358,7 @@ echo "Are you ready to install File?"
 echo 
 yes_or_no
 ##
-tar -zxvf ${FILE}.tar.gz
+tar zxvf ${FILE}.tar.gz
 previous_command_succeeded
 cd ${FILE} 
 previous_command_succeeded
@@ -387,7 +389,7 @@ echo "Are you ready to install Findutils?"
 echo 
 yes_or_no
 ##
-tar -zxvf ${FINDUTILS}.tar.gz
+tar zxvf ${FINDUTILS}.tar.gz
 previous_command_succeeded
 cd ${FINDUTILS} 
 previous_command_succeeded
@@ -449,7 +451,7 @@ echo "Are you ready to install Gettext?"
 echo 
 yes_or_no
 ##
-tar -xvf ${GETTEXT}.tar.xz
+tar xvf ${GETTEXT}.tar.xz
 previous_command_succeeded
 cd ${GETTEXT} 
 previous_command_succeeded
@@ -487,7 +489,7 @@ echo "Are you ready to install Grep?"
 echo 
 yes_or_no
 ##
-tar -xvf ${GREP}.tar.xz
+tar xvf ${GREP}.tar.xz
 previous_command_succeeded
 cd ${GREP}
 previous_command_succeeded
@@ -518,7 +520,7 @@ echo "Are you ready to install Gzip?"
 echo 
 yes_or_no
 ##
-tar -xvf ${GZIP}.tar.xz
+tar xvf ${GZIP}.tar.xz
 previous_command_succeeded
 cd ${GZIP} 
 previous_command_succeeded
@@ -548,7 +550,7 @@ echo "Are you ready to install M4?"
 echo 
 yes_or_no
 ##
-tar -xvf ${M4}.tar.xz
+tar xvf ${M4}.tar.xz
 previous_command_succeeded
 cd ${M4} 
 previous_command_succeeded
@@ -579,7 +581,7 @@ echo "Are you ready to install Make?"
 echo 
 yes_or_no
 ##
-tar -xjvf ${MAKE}.tar.bz2
+tar xjvf ${MAKE}.tar.bz2
 previous_command_succeeded
 cd ${MAKE} 
 previous_command_succeeded
@@ -610,7 +612,7 @@ echo "Are you ready to install Patch?"
 echo 
 yes_or_no
 ##
-tar -xvf ${PATCH}.tar.xz
+tar xvf ${PATCH}.tar.xz
 previous_command_succeeded
 cd ${PATCH} 
 previous_command_succeeded
@@ -640,7 +642,7 @@ echo "Are you ready to install Perl?"
 echo 
 yes_or_no
 ##
-tar -xvf ${PERL}.tar.xz
+tar xvf ${PERL}.tar.xz
 previous_command_succeeded
 cd ${PERL} 
 previous_command_succeeded
@@ -677,7 +679,7 @@ echo "Are you ready to install Sed?"
 echo 
 yes_or_no
 ##
-tar -xvf ${SED}.tar.xz
+tar xvf ${SED}.tar.xz
 previous_command_succeeded
 cd ${SED} 
 previous_command_succeeded
@@ -708,7 +710,7 @@ echo "Are you ready to install Tar?"
 echo 
 yes_or_no
 ##
-tar -xvf ${TAR}.tar.xz
+tar xvf ${TAR}.tar.xz
 previous_command_succeeded
 cd ${TAR} 
 previous_command_succeeded
@@ -739,7 +741,7 @@ echo "Are you ready to install Texinfo?"
 echo 
 yes_or_no
 ##
-tar -xvf ${TEXINFO}.tar.xz
+tar xvf ${TEXINFO}.tar.xz
 previous_command_succeeded
 cd ${TEXINFO} 
 previous_command_succeeded
@@ -770,7 +772,7 @@ echo "Are you ready to install Util-linux?"
 echo 
 yes_or_no
 ##
-tar -xvf ${UTIL_LINUX}.tar.xz
+tar xvf ${UTIL_LINUX}.tar.xz
 previous_command_succeeded
 cd ${UTIL_LINUX} 
 previous_command_succeeded
@@ -804,7 +806,7 @@ echo "Are you ready to install Xz?"
 echo 
 yes_or_no
 ##
-tar -xvf ${XZ}.tar.xz
+tar xvf ${XZ}.tar.xz
 previous_command_succeeded
 cd ${XZ} 
 previous_command_succeeded

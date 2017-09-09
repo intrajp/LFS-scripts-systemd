@@ -17,7 +17,9 @@ echo "Computer instructions may be extracted from this Distribution under the MI
 echo "Linux® is a registered trademark of Linus Torvalds."
 echo "############################################################################################"
 
+. config 
 . functions
+previous_command_succeeded
 
 ####Chapter 5. Constructing a Temporary System
 echo
@@ -31,7 +33,7 @@ yes_or_no
 
 ####5.4. ${BINUTILS_STRING} - Pass 1
 echo
-echo "Are you ready to build Cross Binutils?"
+echo "Are you ready for building Cross Binutils?"
 echo
 yes_or_no
 ##

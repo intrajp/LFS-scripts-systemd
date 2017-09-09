@@ -16,25 +16,23 @@ echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
 echo "############################################################################################"
-
-. config 
+PID="$$"
+export LFS=/mnt/lfs
+. config
 . functions
 previous_command_succeeded
-
-PID="$$"
-####5.37. Changing Ownership
-export LFS=/mnt/lfs
-previous_command_succeeded
-echo "Now chage ownership of /mnt/lfs/tools to root." 
+echo $LFS
+echo "Can you see \"/mnt/lfs\"? If you type yes, I move forward."
 yes_or_no
-chown -R root:root $LFS/tools
-previous_command_succeeded
-echo "Backup /mnt/lfs directory altogether (including source files and current build state) for the future use. Remember the \"Version-8.1-systemd\"."
-echo "This makes a file \"/home/lfs/mnt_lfs_Version-8.1-systemd.tar.gz\"."
+##
+echo "Are you ready making log directories in \"/var/log\"?"
 yes_or_no
-pushd /home/lfs
-  tar -zcf mnt_lfs_Version-8.1-systemd.tar.gz /mnt/lfs
-popd
-previous_command_succeeded
-
-echo "OK, type \"cd PART3;./AUTOSTART\". "
+##
+touch /var/log/{btmp,lastlog,wtmp}
+chgrp -v utmp /var/log/lastlog
+chmod -v 664 /var/log/lastlog
+chmod -v 600 /var/log/btmp
+##
+echo "Let's execute next script."
+echo "source 3_4.sh|tee 3_4.sh.log"
+yes_or_no
