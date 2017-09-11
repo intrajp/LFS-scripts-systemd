@@ -447,6 +447,51 @@ rm -rf ${GETTEXT}
 previous_command_succeeded
 ##
 
+## by intrajp:systemd fails unless blkid.so is not there, so install util-linux before systemd
+
+####6.65. ${UTIL_LINUX_STRING} 
+##6.65.1. FHS compliance notes
+backto_source_dir_part3
+previous_command_succeeded
+echo "Are you ready for installing Util-linux?"
+yes_or_no
+tar xvf ${UTIL_LINUX}.tar.xz
+previous_command_succeeded
+cd ${UTIL_LINUX} 
+previous_command_succeeded
+##
+mkdir -pv /var/lib/hwclock
+previous_command_succeeded
+##6.65.2. Installation of Util-linux
+##
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime     \
+            --docdir=/usr/share/doc/${UTIL_LINUX} \
+            --disable-chfn-chsh  \
+            --disable-login      \
+            --disable-nologin    \
+            --disable-su         \
+            --disable-setpriv    \
+            --disable-runuser    \
+            --disable-pylibmount \
+            --disable-static     \
+            --without-python
+previous_command_succeeded
+##
+make
+previous_command_succeeded
+##
+##chown -Rv nobody .
+##su nobody -s /bin/bash -c "PATH=$PATH make -k check"
+make install
+previous_command_succeeded
+##
+##
+backto_source_dir_part3
+previous_command_succeeded
+rm -rf ${UTIL_LINUX} 
+previous_command_succeeded
+##
+
 ####6.48. ${SYSTEMD_STRING} 
 ##6.68.1. Installation of systemd
 backto_source_dir_part3
