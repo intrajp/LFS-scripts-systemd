@@ -184,6 +184,7 @@ SHADOW_STRING="Shadow-4.5"
 
 SYSTEMD="systemd-234-lfs"
 SYSTEMD_STRING="Systemd-234-lfs"
+SYSTEMD_VERSION="Systemd-234"
 
 TAR="tar-1.29"
 TAR_STRING="Tar-1.29"

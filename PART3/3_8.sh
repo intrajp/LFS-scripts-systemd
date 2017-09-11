@@ -487,7 +487,7 @@ previous_command_succeeded
             --disable-sysusers     \
             --without-python       \
             --with-default-dnssec=no \
-            --docdir=/usr/share/doc/${SYSTEMD}
+            --docdir=/usr/share/doc/${SYSTEMD_VERSION}
 previous_command_succeeded
 ##
 make
