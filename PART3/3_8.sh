@@ -104,10 +104,10 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Expat?"
 yes_or_no
-sed -i 's|usr/bin/env |bin/|' run.sh.in
+#sed -i 's|usr/bin/env |bin/|' run.sh.in
 previous_command_succeeded
 ##
-tar jxvf ${EXPAT}.tar.gz
+tar jxvf ${EXPAT}.tar.bz2
 previous_command_succeeded
 ##
 cd ${EXPAT} 
