@@ -265,7 +265,7 @@ make
 previous_command_succeeded
 #make check
 make install
-install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/${INTLTOOL}/I18N-HOWTO check
+install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/${INTLTOOL}/I18N-HOWTO
 previous_command_succeeded
 ##
 backto_source_dir_part3
