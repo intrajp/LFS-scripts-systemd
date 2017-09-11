@@ -480,7 +480,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Flex?"
 yes_or_no
-tar xvf ${FLEX}.tar.xz    
+tar xzvf ${FLEX}.tar.gz   
 previous_command_succeeded
 cd ${FLEX}     
 previous_command_succeeded
