@@ -69,8 +69,8 @@ EOF
 previous_command_succeeded
 
 ##
-ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
-previous_command_succeeded
+#ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
+#previous_command_succeeded
 ##
 echo "Pink Rabbit Linux" > /etc/hostname
 previous_command_succeeded
@@ -110,11 +110,11 @@ previous_command_succeeded
 ##systemctl disable systemd-timesyncd
 ##
 ############### 7.7 #####################
-cat > /etc/vconsole.conf << "EOF"
-##KEYMAP=de-latin1
-##FONT=Lat2-Terminus16
-EOF
-previous_command_succeeded
+#cat > /etc/vconsole.conf << "EOF"
+###KEYMAP=de-latin1
+###FONT=Lat2-Terminus16
+#EOF
+#previous_command_succeeded
 ##
 ##localectl set-keymap MAP
 ##
