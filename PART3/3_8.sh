@@ -730,9 +730,9 @@ previous_command_succeeded
 backto_source_dir_part3
 echo "Are you ready for installing Diffutils?"
 yes_or_no
-tar xvf ${DIFUTILS}.tar.xz 
+tar xvf ${DIFFUTILS}.tar.xz 
 previous_command_succeeded
-cd ${DIFUTILS} 
+cd ${DIFFUTILS} 
 previous_command_succeeded
 ##
 ./configure --prefix=/usr
@@ -748,7 +748,7 @@ previous_command_succeeded
 ##
 backto_source_dir_part3
 previous_command_succeeded
-rm -rf ${DIFUTILS} 
+rm -rf ${DIFFUTILS} 
 previous_command_succeeded
 ##
 
