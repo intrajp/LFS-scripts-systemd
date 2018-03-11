@@ -29,18 +29,18 @@ HINTS:
 
 When logging in LFS system from host system, try this.
 
+```
 mount -v --bind /dev /mnt/lfs/dev
 mount -v --bind /proc /mnt/lfs/proc
 mount -v --bind /sys /mnt/lfs/sys
-
 chroot "$LFS" /usr/bin/env -i          \
     HOME=/root TERM="$TERM"            \
     PS1='(lfs chroot) \u:\w\$ '        \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin \
     /bin/bash --login
-
+```
 When not working well installing grub on /dev/sdX, try this.
-
+```
 # dd if=/dev/zero of=/dev/sdX seek=1 count=2047
-
 grub-install /dev/sdX
+```
