@@ -1,17 +1,17 @@
 
 echo "############################################################################################"
-echo "Pink Rabbit Linux 8.1"
+echo "Pink Rabbit Linux 8.2"
 echo 
-echo "Copyright(C)2016-2017 Shintaro Fujiwara" 
+echo "Copyright(C)2016-2018 Shintaro Fujiwara" 
 echo "All rights reserved."
 echo 
 echo "Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution"
 echo "Just run scripts and you can make your own Linux Distribution."
 echo ""
-echo "This version is based on Linux From Scratch: Version 8.1-systemd"
+echo "This version is based on Linux From Scratch: Version 8.2-systemd"
 echo "which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K."
-echo "Copyright © 1999-2017 Gerard Beekmans"
-echo "# # Copyright © 1999-2017, Gerard Beekmans"
+echo "Copyright © 1999-2018 Gerard Beekmans"
+echo "# # Copyright © 1999-2018, Gerard Beekmans"
 echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
@@ -29,7 +29,7 @@ previous_command_succeeded
 echo "Are you ready for installing Zlib ?"
 yes_or_no
 ##
-tar xvf ${ZLIB}.tar.xz
+${ZLIB_TAR}
 previous_command_succeeded
 cd ${ZLIB} 
 previous_command_succeeded
@@ -63,7 +63,7 @@ previous_command_succeeded
 echo "Are you ready for installing File ?"
 yes_or_no
 ##
-tar zxvf ${FILE}.tar.gz
+${FILE_TAR}
 previous_command_succeeded
 cd ${FILE} 
 previous_command_succeeded
@@ -90,7 +90,7 @@ previous_command_succeeded
 echo "Are you ready for installing Readline ?"
 yes_or_no
 ##
-tar zxvf ${READLINE}.tar.gz 
+${READLINE_TAR}
 previous_command_succeeded
 cd ${READLINE} 
 previous_command_succeeded

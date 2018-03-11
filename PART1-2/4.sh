@@ -1,17 +1,17 @@
 
 echo "############################################################################################"
-echo "Pink Rabbit Linux 8.1"
+echo "Pink Rabbit Linux 8.2"
 echo 
-echo "Copyright(C)2016-2017 Shintaro Fujiwara" 
+echo "Copyright(C)2016-2018 Shintaro Fujiwara" 
 echo "All rights reserved."
 echo 
 echo "Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution"
 echo "Just run scripts and you can make your own Linux Distribution."
 echo ""
-echo "This version is based on Linux From Scratch: Version 8.1-systemd"
+echo "This version is based on Linux From Scratch: Version 8.2-systemd"
 echo "which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K."
-echo "Copyright © 1999-2017 Gerard Beekmans"
-echo "# # Copyright © 1999-2017, Gerard Beekmans"
+echo "Copyright © 1999-2018 Gerard Beekmans"
+echo "# # Copyright © 1999-2018, Gerard Beekmans"
 echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
@@ -32,7 +32,7 @@ echo "Are you ready to install Tcl?"
 echo
 yes_or_no
 ##
-tar zxvf tcl-core8.6.7-src.tar.gz
+${TCL_TAR}
 previous_command_succeeded
 cd ${TCL} 
 previous_command_succeeded
@@ -77,7 +77,7 @@ echo "Are you ready to install Expect?"
 echo
 yes_or_no
 ##
-tar zxvf ${EXPECT}.tar.gz
+${EXPECT_TAR}
 previous_command_succeeded
 cd ${EXPECT} 
 previous_command_succeeded
@@ -113,7 +113,7 @@ echo "Are you ready to install DejaGNU?"
 echo
 yes_or_no
 ##
-tar zxvf ${DEJAGNU}.tar.gz
+${DEJAGNU_TAR}
 previous_command_succeeded
 cd ${DEJAGNU} 
 previous_command_succeeded
@@ -131,18 +131,18 @@ previous_command_succeeded
 rm -rf ${DEJAGNU} 
 previous_command_succeeded
 
-####5.14. ${CECH_STRING}
-##5.14.1. Installation of Check
+####5.14. ${M4_STRING}
+##5.14.1. Installation of M4 
 backto_source_dir
 previous_command_succeeded
 echo
-echo "Are you ready to install Check?"
+echo "Are you ready to install M4?"
 echo 
 yes_or_no
 ##
-tar zxvf ${CHECK}.tar.gz
+${M4_TAR}
 previous_command_succeeded
-cd ${CHECK} 
+cd ${M4} 
 previous_command_succeeded
 ##
 PKG_CONFIG= ./configure --prefix=/tools
@@ -158,7 +158,7 @@ previous_command_succeeded
 ##
 backto_source_dir
 previous_command_succeeded
-rm -rf ${CHECK} 
+rm -rf ${M4} 
 previous_command_succeeded
 
 ####5.15. ${NCURSES}
@@ -170,7 +170,7 @@ echo "Are you ready to install Ncurses?"
 echo 
 yes_or_no
 ##
-tar zxvf ${NCURSES}.tar.gz
+${NCURSES_TAR}
 previous_command_succeeded
 cd ${NCURSES} 
 previous_command_succeeded
@@ -207,7 +207,7 @@ echo "Are you ready to install Bash?"
 echo 
 yes_or_no
 ##
-tar zxvf ${BASH}.tar.gz
+${BASH_TAR}
 previous_command_succeeded
 cd ${BASH} 
 previous_command_succeeded
@@ -241,7 +241,7 @@ echo "Are you ready to install Bison ?"
 echo 
 yes_or_no
 ##
-tar xvf ${BISON}.tar.xz
+${BISON_TAR}
 previous_command_succeeded
 cd ${BISON} 
 previous_command_succeeded
@@ -261,7 +261,7 @@ previous_command_succeeded
 rm -rf ${BISON} 
 previous_command_succeeded
 
-####5.18. ${BZIP_STRING}
+####5.18. ${BZIP2_STRING}
 ##5.18.1. Installation of Bzip2
 backto_source_dir
 previous_command_succeeded
@@ -270,9 +270,9 @@ echo "Are you ready to install Bzip2?"
 echo 
 yes_or_no
 ##
-tar zxvf ${BZIP}.tar.gz
+${BZIP2_TAR}
 previous_command_succeeded
-cd ${BZIP} 
+cd ${BZIP2} 
 previous_command_succeeded
 ##
 make
@@ -296,7 +296,7 @@ echo "Are you ready to install Coreutils?"
 echo 
 yes_or_no
 ##
-tar xvf ${COREUTILS}.tar.xz
+${COREUTILS_TAR}
 previous_command_succeeded
 cd ${COREUTILS} 
 previous_command_succeeded
@@ -327,7 +327,7 @@ echo "Are you ready to install Diffutils?"
 echo 
 yes_or_no
 ##
-tar xvf ${DIFFUTILS}.tar.xz
+${DIFFUTILS_TAR}
 previous_command_succeeded
 cd ${DIFFUTILS} 
 previous_command_succeeded
@@ -358,7 +358,7 @@ echo "Are you ready to install File?"
 echo 
 yes_or_no
 ##
-tar zxvf ${FILE}.tar.gz
+${FILE_TAR}
 previous_command_succeeded
 cd ${FILE} 
 previous_command_succeeded
@@ -389,7 +389,7 @@ echo "Are you ready to install Findutils?"
 echo 
 yes_or_no
 ##
-tar zxvf ${FINDUTILS}.tar.gz
+${FINDUTILS_TAR}
 previous_command_succeeded
 cd ${FINDUTILS} 
 previous_command_succeeded
@@ -420,7 +420,7 @@ echo "Are you ready to install Gawk?"
 echo 
 yes_or_no
 ##
-tar -xvf ${GAWK}.tar.xz
+${GAWK_TAR}
 previous_command_succeeded
 cd ${GAWK} 
 previous_command_succeeded
@@ -451,7 +451,7 @@ echo "Are you ready to install Gettext?"
 echo 
 yes_or_no
 ##
-tar xvf ${GETTEXT}.tar.xz
+${GETTEXT_TAR}
 previous_command_succeeded
 cd ${GETTEXT} 
 previous_command_succeeded
@@ -489,7 +489,7 @@ echo "Are you ready to install Grep?"
 echo 
 yes_or_no
 ##
-tar xvf ${GREP}.tar.xz
+${GREP_TAR}
 previous_command_succeeded
 cd ${GREP}
 previous_command_succeeded
@@ -520,7 +520,7 @@ echo "Are you ready to install Gzip?"
 echo 
 yes_or_no
 ##
-tar xvf ${GZIP}.tar.xz
+${GZIP_TAR}
 previous_command_succeeded
 cd ${GZIP} 
 previous_command_succeeded
@@ -542,38 +542,8 @@ previous_command_succeeded
 rm -rf ${GZIP} 
 previous_command_succeeded
 
-####5.27. ${M4_STRING} 
-##5.27.1. Installation of M4
-backto_source_dir
-echo
-echo "Are you ready to install M4?"
-echo 
-yes_or_no
-##
-tar xvf ${M4}.tar.xz
-previous_command_succeeded
-cd ${M4} 
-previous_command_succeeded
-##
-./configure --prefix=/tools
-previous_command_succeeded
-##
-make
-previous_command_succeeded
-##
-#make check
-##
-make install
-previous_command_succeeded
-##
-##
-backto_source_dir
-previous_command_succeeded
-rm -rf ${M4} 
-previous_command_succeeded
-
-####5.28. ${MAKE_STRING} 
-##5.28.1. Installation of Make
+####5.27. ${MAKE_STRING} 
+##5.27.1. Installation of Make
 backto_source_dir
 previous_command_succeeded
 echo
@@ -581,11 +551,13 @@ echo "Are you ready to install Make?"
 echo 
 yes_or_no
 ##
-tar xjvf ${MAKE}.tar.bz2
+${MAKE_TAR}
 previous_command_succeeded
 cd ${MAKE} 
 previous_command_succeeded
 ##
+sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
+previous_command_succeeded
 ./configure --prefix=/tools --without-guile
 previous_command_succeeded
 ##
@@ -603,8 +575,8 @@ previous_command_succeeded
 rm -rf ${MAKE} 
 previous_command_succeeded
 
-####5.29. ${PATCH_STRING} 
-##5.29.1. Installation of Patch
+####5.28. ${PATCH_STRING} 
+##5.28.1. Installation of Patch
 backto_source_dir
 previous_command_succeeded
 echo
@@ -612,7 +584,7 @@ echo "Are you ready to install Patch?"
 echo 
 yes_or_no
 ##
-tar xvf ${PATCH}.tar.xz
+${PATCH_TAR}
 previous_command_succeeded
 cd ${PATCH} 
 previous_command_succeeded
@@ -634,23 +606,19 @@ previous_command_succeeded
 rm -rf ${PATCH} 
 previous_command_succeeded
 
-####5.30. ${PERL_STRING} 
-##5.30.1. Installation of Perl
+####5.29. ${PERL_STRING} 
+##5.29.1. Installation of Perl
 backto_source_dir
 echo
 echo "Are you ready to install Perl?"
 echo 
 yes_or_no
 ##
-tar xvf ${PERL}.tar.xz
+${PERL_TAR}
 previous_command_succeeded
 cd ${PERL} 
 previous_command_succeeded
 ##
-sed -e '9751 a#ifndef PERL_IN_XSUB_RE' \
-    -e '9808 a#endif' \
-    -i regexec.c
-previous_command_succeeded
 sh Configure -des -Dprefix=/tools -Dlibs=-lm
 previous_command_succeeded
 ##
@@ -670,8 +638,8 @@ previous_command_succeeded
 rm -rf ${PERL} 
 previous_command_succeeded
 
-####5.31. ${SED_STRING} 
-##5.31.1. Installation of Sed
+####5.30. ${SED_STRING} 
+##5.30.1. Installation of Sed
 backto_source_dir
 previous_command_succeeded
 echo
@@ -679,7 +647,7 @@ echo "Are you ready to install Sed?"
 echo 
 yes_or_no
 ##
-tar xvf ${SED}.tar.xz
+${SED_TAR}
 previous_command_succeeded
 cd ${SED} 
 previous_command_succeeded
@@ -701,8 +669,8 @@ previous_command_succeeded
 rm -rf ${SED} 
 previous_command_succeeded
 
-####5.32. ${TAR_STRING} 
-##5.32.1. Installation of Tar
+####5.31. ${TAR_STRING} 
+##5.31.1. Installation of Tar
 backto_source_dir
 previous_command_succeeded
 echo
@@ -710,7 +678,7 @@ echo "Are you ready to install Tar?"
 echo 
 yes_or_no
 ##
-tar xvf ${TAR}.tar.xz
+${TAR_TAR}
 previous_command_succeeded
 cd ${TAR} 
 previous_command_succeeded
@@ -732,8 +700,8 @@ previous_command_succeeded
 rm -rf ${TAR} 
 previous_command_succeeded
 
-####5.33. ${TEXINFO_STRING} 
-##5.33.1. Installation of Texinfo
+####5.32. ${TEXINFO_STRING} 
+##5.32.1. Installation of Texinfo
 backto_source_dir
 previous_command_succeeded
 echo
@@ -741,7 +709,7 @@ echo "Are you ready to install Texinfo?"
 echo 
 yes_or_no
 ##
-tar xvf ${TEXINFO}.tar.xz
+${TEXINFO_TAR}
 previous_command_succeeded
 cd ${TEXINFO} 
 previous_command_succeeded
@@ -763,8 +731,8 @@ previous_command_succeeded
 rm -rf ${TEXINFO} 
 previous_command_succeeded
 
-####5.34. ${UTIL_LINUX_STRING}
-##5.341. Installation of Util-linux
+####5.33. ${UTIL_LINUX_STRING}
+##5.33.1. Installation of Util-linux
 backto_source_dir
 previous_command_succeeded
 echo
@@ -772,7 +740,7 @@ echo "Are you ready to install Util-linux?"
 echo 
 yes_or_no
 ##
-tar xvf ${UTIL_LINUX}.tar.xz
+${UTIL_LINUX_TAR}
 previous_command_succeeded
 cd ${UTIL_LINUX} 
 previous_command_succeeded
@@ -797,8 +765,8 @@ previous_command_succeeded
 rm -rf ${UTIL_LINUX} 
 previous_command_succeeded
 
-####5.35. ${XZ_STRING} 
-##5.35.1. Installation of Xz
+####5.34. ${XZ_STRING} 
+##5.34.1. Installation of Xz
 backto_source_dir
 previous_command_succeeded
 echo
@@ -806,7 +774,7 @@ echo "Are you ready to install Xz?"
 echo 
 yes_or_no
 ##
-tar xvf ${XZ}.tar.xz
+${XZ_TAR}
 previous_command_succeeded
 cd ${XZ} 
 previous_command_succeeded
@@ -837,6 +805,10 @@ strip --strip-debug /tools/lib/*
 ##
 rm -rf /tools/{,share}/{info,man,doc}
 previous_command_succeeded
+##
+find /tools/{lib,libexec} -name \*.la -delete
+previous_command_succeeded
+
 ##
 echo "Done."
 echo "Now be root (exit and cd to /home/lfs )and execute \"source 5.sh|tee 5.sh.log\"."

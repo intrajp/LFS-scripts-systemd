@@ -1,17 +1,17 @@
 
 echo "############################################################################################"
-echo "Pink Rabbit Linux 8.1"
+echo "Pink Rabbit Linux 8.2"
 echo 
-echo "Copyright(C)2016-2017 Shintaro Fujiwara" 
+echo "Copyright(C)2016-2018 Shintaro Fujiwara" 
 echo "All rights reserved."
 echo 
 echo "Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution"
 echo "Just run scripts and you can make your own Linux Distribution."
 echo ""
-echo "This version is based on Linux From Scratch: Version 8.1-systemd"
+echo "This version is based on Linux From Scratch: Version 8.2-systemd"
 echo "which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K."
-echo "Copyright © 1999-2017 Gerard Beekmans"
-echo "# # Copyright © 1999-2017, Gerard Beekmans"
+echo "Copyright © 1999-2018 Gerard Beekmans"
+echo "# # Copyright © 1999-2018, Gerard Beekmans"
 echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
@@ -29,7 +29,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Linux API Headers?" 
 yes_or_no
-tar xvf ${LINUX}.tar.xz
+${LINUX_TAR}
 previous_command_succeeded
 cd ${LINUX} 
 previous_command_succeeded
@@ -55,7 +55,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Man-pages?"
 yes_or_no
-tar xvf ${MAN_PAGES}.tar.xz
+${MAN_PAGES_TAR}
 previous_command_succeeded
 cd ${MAN_PAGES} 
 previous_command_succeeded
@@ -75,7 +75,7 @@ echo "Are you ready for installing Glibc?"
 yes_or_no
 ##
 previous_command_succeeded
-tar xvf ${GLIBC}.tar.xz
+${GLIBC_TAR}
 previous_command_succeeded
 cd ${GLIBC} 
 previous_command_succeeded
@@ -87,10 +87,10 @@ ln -sfv /tools/lib/gcc /usr/lib
 previous_command_succeeded
 ##
 case $(uname -m) in
-  i?86)  GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/7.2.0/include
+  i?86)  GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/${GCC_VERSION}/include
         ln -sfv ld-linux.so.2 /lib/ld-lsb.so.3
   ;;
-  x86_64)  GCC_INCDIR=/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include
+  x86_64)  GCC_INCDIR=/usr/lib/gcc/x86_64-pc-linux-gnu/${GCC_VERSION}/include
           ln -sfv ../lib/ld-linux-x86-64.so.2 /lib64
           ln -sfv ../lib/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
   ;;
@@ -170,7 +170,7 @@ localedef -i it_IT -f ISO-8859-1 it_IT
 previous_command_succeeded
 localedef -i it_IT -f UTF-8 it_IT.UTF-8
 previous_command_succeeded
-localedef -i ja_JP -f EUC-JP ja_JP
+localedef -i ja_JP -f UTF-8 ja_JP
 previous_command_succeeded
 localedef -i ru_RU -f KOI8-R ru_RU.KOI8-R
 previous_command_succeeded
@@ -186,6 +186,7 @@ previous_command_succeeded
 ##
 
 ##6.9.2. Configuring Glibc
+##6.9.2.1. Adding nsswitch.conf 
 cat > /etc/nsswitch.conf << "EOF"
 # Begin /etc/nsswitch.conf
 
@@ -193,7 +194,7 @@ passwd: files
 group: files
 shadow: files
 
-hosts: files dns myhostname
+hosts: files dns
 networks: files
 
 protocols: files
@@ -205,7 +206,8 @@ rpc: files
 EOF
 previous_command_succeeded
 ##
-tar xf ../../tzdata2017b.tar.gz
+##6.9.2.2. Adding time zone data 
+${TZDATA_TAR}
 previous_command_succeeded
 
 ZONEINFO=/usr/share/zoneinfo
@@ -230,13 +232,13 @@ tzselect
 ##
 echo "Enter you timezone"
 read TIMEZONE
-echo "Are you sure your time zone is \"$TIMEZONE\" ?"
+echo "Are you sure your time zone is \"${TIMEZONE}\" ?"
 yes_or_no
 ##
-ln -sfv /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+ln -sfv /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
 previous_command_succeeded
 ##
-##6.9.3. Configuring the Dynamic Loader
+##6.9.2.3. Configuring the Dynamic Loader
 cat > /etc/ld.so.conf << "EOF"
 # Begin /etc/ld.so.conf
 /usr/local/lib
@@ -267,11 +269,11 @@ yes_or_no
 ##
 mv -v /tools/bin/{ld,ld-old}
 previous_command_succeeded
-mv -v /tools/$(gcc -dumpmachine)/bin/{ld,ld-old}
+mv -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld,ld-old}
 previous_command_succeeded
 mv -v /tools/bin/{ld-new,ld}
 previous_command_succeeded
-ln -sv /tools/bin/ld /tools/$(gcc -dumpmachine)/bin/ld
+ln -sv /tools/bin/ld /tools/$(uname -m)-pc-linux-gnu/bin/ld
 previous_command_succeeded
 ##
 gcc -dumpspecs | sed -e 's@/tools@@g' \
@@ -285,7 +287,7 @@ echo 'int main(){}' > dummy.c
 cc dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ': /lib'
 ##
-echo "Can you see \"[Requesting program interpreter: /lib/ld-linux.so.2]\"(it would be ...64, or depends on your machine's architecture)?"
+echo "Can you see \"[Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]\"?"
 yes_or_no
 ##
 grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log
@@ -302,19 +304,19 @@ yes_or_no
 ##
 grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g'
 ##
-echo "Can you see these lines(it would be \".../lib64)?"
+echo "Can you see these lines?"
 echo "SEARCH_DIR(\"/usr/lib\")"
 echo "SEARCH_DIR(\"/lib\");"
 yes_or_no
 ##
 grep "/lib.*/libc.so.6 " dummy.log
 ##
-echo "Can you see \"attempt to open /lib/libc.so.6 succeeded\"(it would be ...64)?"
+echo "Can you see \"attempt to open /lib/libc.so.6 succeeded\"?"
 yes_or_no
 ##
 grep found dummy.log
 ##
-echo "Can you see \"found ld-linux.so.2 at /lib/ld-linux.so.2\"(it would be ...64)?"
+echo "Can you see \"found ld-linux-x86-64.so.2 at /lib/ld-linux-x86-64.so.2\"?"
 yes_or_no
 rm -v dummy.c a.out dummy.log
 ##

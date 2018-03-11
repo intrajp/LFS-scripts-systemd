@@ -1,17 +1,17 @@
 
 echo "############################################################################################"
-echo "Pink Rabbit Linux 8.1"
+echo "Pink Rabbit Linux 8.2"
 echo 
-echo "Copyright(C)2016-2017 Shintaro Fujiwara" 
+echo "Copyright(C)2016-2018 Shintaro Fujiwara" 
 echo "All rights reserved."
 echo 
 echo "Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution"
 echo "Just run scripts and you can make your own Linux Distribution."
 echo ""
-echo "This version is based on Linux From Scratch: Version 8.1-systemd"
+echo "This version is based on Linux From Scratch: Version 8.2-systemd"
 echo "which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K."
-echo "Copyright © 1999-2017 Gerard Beekmans"
-echo "# # Copyright © 1999-2017, Gerard Beekmans"
+echo "Copyright © 1999-2018 Gerard Beekmans"
+echo "# # Copyright © 1999-2018, Gerard Beekmans"
 echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
@@ -40,7 +40,7 @@ yes_or_no
 backto_source_dir
 previous_command_succeeded
 ##
-tar -xjvf ${BINUTILS}.tar.bz2
+${BINUTILS_TAR}
 previous_command_succeeded
 cd "${BINUTILS}" 
 previous_command_succeeded
@@ -82,22 +82,22 @@ echo "Are you ready to Install Cross GCC?"
 echo
 yes_or_no
 ##
-tar -xvf ${GCC}.tar.xz 
+${GCC_TAR}
 previous_command_succeeded
 cd ${GCC} 
 previous_command_succeeded
 ##
-tar -xf ../mpfr-3.1.5.tar.xz
+${MPFR_TAR_GCC}
 previous_command_succeeded
-mv -v mpfr-3.1.5 mpfr
+mv -v ${MPFR} mpfr
 previous_command_succeeded
-tar -xf ../gmp-6.1.2.tar.xz
+${GMP_TAR_GCC}
 previous_command_succeeded
-mv -v gmp-6.1.2 gmp
+mv -v ${GMP} gmp
 previous_command_succeeded
-tar -xf ../mpc-1.0.3.tar.gz
+${MPC_TAR_GCC}
 previous_command_succeeded
-mv -v mpc-1.0.3 mpc
+mv -v ${MPC} mpc
 previous_command_succeeded
 ##
 for file in gcc/config/{linux,i386/linux{,64}}.h 
@@ -112,6 +112,14 @@ do
 #define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
   touch $file.orig
 done
+previous_command_succeeded
+##
+case $(uname -m) in
+  x86_64)
+    sed -e '/m64=/s/lib64/lib/' \
+      -i.orig gcc/config/i386/t-linux64
+  ;;
+esac
 previous_command_succeeded
 ##
 mkdir -v build
@@ -164,7 +172,7 @@ echo "Are you ready to Install Linux API Headers?"
 echo
 yes_or_no
 ##
-tar -xvf ${LINUX}.tar.xz
+${LINUX_TAR}
 previous_command_succeeded
 cd ${LINUX} 
 previous_command_succeeded
@@ -192,7 +200,7 @@ echo "Are you ready to Install Glibc?"
 echo
 yes_or_no
 ##
-tar -xvf ${GLIBC}.tar.xz
+${GLIBC_TAR}
 previous_command_succeeded
 cd ${GLIBC} 
 previous_command_succeeded
@@ -228,7 +236,7 @@ echo 'int main(){}' > dummy.c
 $LFS_TGT-gcc dummy.c
 readelf -l a.out | grep ': /tools'
 ##
-echo "Can you see [Requesting program interpreter: /tools/lib/ld-linux.so.2] (If your system is 64-bit, it will be lib64.)"
+echo "Can you see [Requesting program interpreter: /tools/lib64/ld-linux-x86-64.so.2] ?"
 yes_or_no
 ##
 rm -v dummy.c a.out
@@ -244,7 +252,7 @@ echo
 yes_or_no
 ##
 ##
-tar -xvf ${GCC}.tar.xz
+${GCC_TAR}
 previous_command_succeeded
 cd ${GCC} 
 previous_command_succeeded
@@ -284,7 +292,7 @@ echo "Are you ready to Install Binutils?"
 echo
 yes_or_no
 ##
-tar -xjvf ${BINUTILS}.tar.bz2
+${BINUTILS_TAR}
 previous_command_succeeded
 cd ${BINUTILS} 
 previous_command_succeeded
@@ -332,7 +340,7 @@ echo "Are you ready to Install GCC?"
 echo
 yes_or_no
 ##
-tar -xvf ${GCC}.tar.xz
+${GCC_TAR}
 previous_command_succeeded
 cd ${GCC} 
 previous_command_succeeded
@@ -355,17 +363,17 @@ do
 done
 previous_command_succeeded
 ##
-tar -xf ../mpfr-3.1.5.tar.xz
+${MPFR_TAR_GCC}
 previous_command_succeeded
-mv -v mpfr-3.1.5 mpfr
+mv -v ${MPFR} mpfr
 previous_command_succeeded
-tar -xf ../gmp-6.1.2.tar.xz
+${GMP_TAR_GCC}
 previous_command_succeeded
-mv -v gmp-6.1.2 gmp
+mv -v ${GMP} gmp
 previous_command_succeeded
-tar -xf ../mpc-1.0.3.tar.gz
+${MPC_TAR_GCC}
 previous_command_succeeded
-mv -v mpc-1.0.3 mpc
+mv -v ${MPC} mpc
 previous_command_succeeded
 ##
 mkdir -v build
@@ -407,7 +415,7 @@ echo 'int main(){}' > dummy.c
 cc dummy.c
 readelf -l a.out | grep ': /tools'
 ##
-echo "Can you see [Requesting program interpreter: /tools/lib/ld-linux.so.2] (If your system is 64-bit, it will be lib64."
+echo "Can you see [Requesting program interpreter: /tools/lib64/ld-linux.so.2]?"
 yes_or_no
 ##
 rm -v dummy.c a.out

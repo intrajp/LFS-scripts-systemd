@@ -1,0 +1,23 @@
+############################################################################################
+Pink Rabbit Linux 8.2
+
+Copyright(C)2016-2018 Shintaro Fujiwara
+All rights reserved.
+
+Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution
+Just run scripts and you can make your own Linux Distribution.
+
+This version is based on Linux From Scratch: Version 8.2-systemd
+which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K.
+Copyright © 1999-2018 Gerard Beekmans
+# # Copyright © 1999-2018, Gerard Beekmans
+This Distribution is licensed under a Creative Commons License.
+Computer instructions may be extracted from this Distribution under the MIT License.
+Linux® is a registered trademark of Linus Torvalds.
+############################################################################################
+Now chage ownership of /mnt/lfs/tools to root.
+Backup /mnt/lfs directory altogether (including source files and current build state) for the future use. Remember the "Version-8.2-systemd".
+This makes a file "/home/lfs/mnt_lfs_Version-8.2-systemd.tar.gz".
+/home/lfs ~/LFS-scripts-systemd/PART1-2
+~/LFS-scripts-systemd/PART1-2
+OK, type "cd PART3;./AUTOSTART". 

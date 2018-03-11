@@ -1,8 +1,8 @@
 
 echo "############################################################################################"
-echo "Pink Rabbit Linux 8.1"
+echo "Pink Rabbit Linux 8.2"
 echo 
-echo "Copyright(C)2016-2017 Shintaro Fujiwara" 
+echo "Copyright(C)2016-2018 Shintaro Fujiwara" 
 echo "All rights reserved."
 echo 
 echo "Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution"
@@ -10,8 +10,8 @@ echo "Just run scripts and you can make your own Linux Distribution."
 echo ""
 echo "This version is based on Linux From Scratch: Version 8.1-systemd"
 echo "which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K."
-echo "Copyright © 1999-2017 Gerard Beekmans"
-echo "# # Copyright © 1999-2017, Gerard Beekmans"
+echo "Copyright © 1999-2018 Gerard Beekmans"
+echo "# # Copyright © 1999-2018, Gerard Beekmans"
 echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
@@ -26,17 +26,13 @@ PID="$$"
 echo $LFS
 echo "Can you see \"/mnt/lfs\"?"
 yes_or_no
-echo "Are you ready for 6.71. Stripping Again?"
+echo "Are you ready for 6.78. Stripping Again?"
 yes_or_no
 #chroot $LFS /tools/bin/env -i            \
 #    HOME=/root TERM=$TERM PS1='\u:\w\$ ' \
 #    PATH=/bin:/usr/bin:/sbin:/usr/sbin   \
 #    /tools/bin/bash --login
 ##
-
-/tools/bin/find /{,usr/}{bin,lib,sbin} -type f \
-    -exec /tools/bin/strip --strip-debug '{}' ';'
-previous_command_succeeded
 
 /tools/bin/find /usr/lib -type f -name \*.a \
     -exec /tools/bin/strip --strip-debug {} ';'
@@ -61,6 +57,12 @@ echo "chroot \"$LFS\" /usr/bin/env -i              \\"
 echo "HOME=/root TERM=\"$TERM\" PS1='\u:\w\$ ' \\"
 echo "PATH=/bin:/usr/bin:/sbin:/usr/sbin     \\"
 echo "/bin/bash --login"
+##
+## copy this for the future use...when building a kernel...
+#chroot /mnt/lfs /usr/bin/env -i      \
+#HOME=/root TERM=$TERM PS1='\u:\w\$ ' \
+#PATH=/bin:/usr/bin:/sbin:/usr/sbin   \
+#/bin/bash --login
 yes_or_no
 rm -rf /tools
 previous_command_succeeded
@@ -78,6 +80,8 @@ previous_command_succeeded
 rm -f /usr/lib/libfl_pic.a
 previous_command_succeeded
 rm -f /usr/lib/libz.a
+previous_command_succeeded
+find /usr/lib -name \*.la -delete
 previous_command_succeeded
 ##
 echo "But don't worry just follow instruction below.You can login chroot environment properly." 

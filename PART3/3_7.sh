@@ -1,17 +1,17 @@
 
 echo "############################################################################################"
-echo "Pink Rabbit Linux 8.1"
+echo "Pink Rabbit Linux 8.2"
 echo 
-echo "Copyright(C)2016-2017 Shintaro Fujiwara" 
+echo "Copyright(C)2016-2018 Shintaro Fujiwara" 
 echo "All rights reserved."
 echo 
 echo "Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution"
 echo "Just run scripts and you can make your own Linux Distribution."
 echo ""
-echo "This version is based on Linux From Scratch: Version 8.1-systemd"
+echo "This version is based on Linux From Scratch: Version 8.2-systemd"
 echo "which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K."
-echo "Copyright © 1999-2017 Gerard Beekmans"
-echo "# # Copyright © 1999-2017, Gerard Beekmans"
+echo "Copyright © 1999-2018 Gerard Beekmans"
+echo "# # Copyright © 1999-2018, Gerard Beekmans"
 echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
@@ -23,19 +23,19 @@ export LFS=/mnt/lfs
 previous_command_succeeded
 ##
 
-####6.21.${BZIP_STRING} 
+####6.21.${BZIP2_STRING} 
 ##6.21.1. Installation of Bzip2
 ##
 backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Bzip2?"
 yes_or_no
-tar zxvf ${BZIP}.tar.gz
+${BZIP2_TAR}
 previous_command_succeeded
-cd ${BZIP} 
+cd ${BZIP2} 
 previous_command_succeeded
 ##
-patch -Np1 -i ../${BZIP}-install_docs-1.patch
+patch -Np1 -i ../${BZIP2}-install_docs-1.patch
 previous_command_succeeded
 ##
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
@@ -70,7 +70,7 @@ previous_command_succeeded
 ##
 backto_source_dir_part3
 previous_command_succeeded
-rm -rf ${BZIP} 
+rm -rf ${BZIP2} 
 previous_command_succeeded
 
 ####6.22. ${PKG_CONFIG_STRING} 
@@ -80,7 +80,7 @@ previous_command_succeeded
 echo "Are you ready for installing Pkg-config?"
 yes_or_no
 ##
-tar zxvf ${PKG_CONFIG}.tar.gz 
+${PKG_CONFIG_TAR}
 previous_command_succeeded
 cd ${PKG_CONFIG} 
 previous_command_succeeded
@@ -111,7 +111,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Ncurses?"
 yes_or_no
-tar zxvf ${NCURSES}.tar.gz
+${NCURSES_TAR}
 previous_command_succeeded
 cd ${NCURSES} 
 previous_command_succeeded
@@ -180,7 +180,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Attr?"
 yes_or_no
-tar zxvf ${ATTR}.src.tar.gz
+${ATTR_TAR}
 previous_command_succeeded
 cd ${ATTR} 
 ##
@@ -222,7 +222,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Acl?"
 yes_or_no
-tar zxvf ${ACL}.src.tar.gz
+${ACL_TAR}
 previous_command_succeeded
 cd ${ACL} 
 previous_command_succeeded
@@ -269,7 +269,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Libcap?"
 yes_or_no
-tar xvf ${LIBCAP}.tar.xz
+${LIBCAP_TAR}
 previous_command_succeeded
 cd ${LIBCAP} 
 previous_command_succeeded
@@ -280,7 +280,7 @@ previous_command_succeeded
 make
 previous_command_succeeded
 ##
-make RAISE_SETFCAP=no prefix=/usr install
+make RAISE_SETFCAP=no lib=lib prefix=/usr install
 previous_command_succeeded
 chmod -v 755 /usr/lib/libcap.so
 previous_command_succeeded
@@ -301,7 +301,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Sed?"
 yes_or_no
-tar xvf ${SED}.tar.xz
+${SED_TAR}
 previous_command_succeeded
 cd  ${SED} 
 previous_command_succeeded
@@ -340,7 +340,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Shadow?"
 yes_or_no
-tar xvf ${SHADOW}.tar.xz 
+${SHADOW_TAR}
 previous_command_succeeded
 cd ${SHADOW} 
 previous_command_succeeded
@@ -397,7 +397,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Psmisc?"
 yes_or_no
-tar xvf ${PSMISC}.tar.xz
+${PSMISC_TAR}
 previous_command_succeeded
 cd ${PSMISC} 
 previous_command_succeeded
@@ -429,7 +429,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Iana-Etc?"
 yes_or_no
-tar xjvf ${IANA}.tar.bz2    
+${IANA_TAR}
 previous_command_succeeded
 cd ${IANA}    
 previous_command_succeeded
@@ -452,7 +452,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Bison?"
 yes_or_no
-tar xvf ${BISON}.tar.xz      
+${BISON_TAR}
 previous_command_succeeded
 cd ${BISON}      
 previous_command_succeeded
@@ -480,11 +480,14 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Flex?"
 yes_or_no
-tar xzvf ${FLEX}.tar.gz   
+${FLEX_TAR}
 previous_command_succeeded
 cd ${FLEX}     
 previous_command_succeeded
 ##
+sed -i "/math.h/a #include <malloc.h>" src/flexdef.h
+previous_command_succeeded
+HELP2MAN=/tools/bin/true \
 ./configure --prefix=/usr --docdir=/usr/share/doc/${FLEX}
 previous_command_succeeded
 ##
@@ -511,7 +514,7 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Grep?"
 yes_or_no
-tar xvf ${GREP}.tar.xz       
+${GREP_TAR}
 previous_command_succeeded
 cd ${GREP} 
 previous_command_succeeded
@@ -541,12 +544,9 @@ backto_source_dir_part3
 previous_command_succeeded
 echo "Are you ready for installing Bash?"
 yes_or_no
-tar zxvf ${BASH}.tar.gz        
+${BASH_TAR}
 previous_command_succeeded
 cd ${BASH}        
-previous_command_succeeded
-##
-patch -Np1 -i ../${BASH}-upstream_fixes-1.patch
 previous_command_succeeded
 ##
 ./configure --prefix=/usr                       \

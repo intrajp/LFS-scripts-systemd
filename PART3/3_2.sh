@@ -1,17 +1,17 @@
 
 echo "############################################################################################"
-echo "Pink Rabbit Linux 8.1"
+echo "Pink Rabbit Linux 8.2"
 echo 
-echo "Copyright(C)2016-2017 Shintaro Fujiwara" 
+echo "Copyright(C)2016-2018 Shintaro Fujiwara" 
 echo "All rights reserved."
 echo 
 echo "Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution"
 echo "Just run scripts and you can make your own Linux Distribution."
 echo ""
-echo "This version is based on Linux From Scratch: Version 8.1-systemd"
+echo "This version is based on Linux From Scratch: Version 8.2-systemd"
 echo "which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K."
-echo "Copyright © 1999-2017 Gerard Beekmans"
-echo "# # Copyright © 1999-2017, Gerard Beekmans"
+echo "Copyright © 1999-2018 Gerard Beekmans"
+echo "# # Copyright © 1999-2018, Gerard Beekmans"
 echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
@@ -37,9 +37,7 @@ mkdir -v  /usr/libexec
 mkdir -pv /usr/{,local/}share/man/man{1..8}
 
 case $(uname -m) in
- x86_64) ln -sv lib /lib64
-         ln -sv lib /usr/lib64
-         ln -sv lib /usr/local/lib64 ;;
+ x86_64) mkdir -v /lib64 ;; 
 esac
 
 mkdir -v /var/{log,mail,spool}
@@ -48,11 +46,23 @@ ln -sv /run/lock /var/lock
 mkdir -pv /var/{opt,cache,lib/{color,misc,locate},local}
 ##
 ##6.6. Creating Essential Files and Symlinks
-ln -sv /tools/bin/{bash,cat,echo,pwd,stty} /bin
-ln -sv /tools/bin/perl /usr/bin
+ln -sv /tools/bin/{bash,cat,echo,pwd,rm,stty} /bin
+ln -sv /tools/bin/{env,install,perl} /usr/bin
 ln -sv /tools/lib/libgcc_s.so{,.1} /usr/lib
-ln -sv /tools/lib/libstdc++.so{,.6} /usr/lib
-sed 's/tools/usr/' /tools/lib/libstdc++.la > /usr/lib/libstdc++.la
+ln -sv /tools/lib/libstdc++.{a,so{,.6}} /usr/lib
+for lib in blkid lzma mount uuid
+do
+  ln -sv /tools/lib/lib$lib.so* /usr/lib
+done
+ln -svg /tools/include/blkid  /usr/include
+ln -svg /tools/include/libmount  /usr/include
+ln -svg /tools/include/uuid  /usr/include
+install -vdm755  /usr/lib/pkgconfig
+for pc in blkid  mount uuid
+do
+  sed 's@tools@usr@g' /tools/lib/pkgconfig/${pc}.pc \
+    > /usr/lib//pkgconfig/${pc}.pc
+done
 ln -sv bash /bin/sh
 ##
 ln -sv /proc/self/mounts /etc/mtab
@@ -95,6 +105,7 @@ messagebus:x:18:
 systemd-journal:x:23:
 input:x:24:
 mail:x:34:
+kvm:x:61:
 systemd-bus-proxy:x:72:
 systemd-journal-gateway:x:73:
 systemd-journal-remote:x:74:

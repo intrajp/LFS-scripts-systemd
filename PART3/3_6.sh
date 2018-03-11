@@ -1,17 +1,17 @@
 
 echo "############################################################################################"
-echo "Pink Rabbit Linux 8.1"
+echo "Pink Rabbit Linux 8.2"
 echo 
-echo "Copyright(C)2016-2017 Shintaro Fujiwara" 
+echo "Copyright(C)2016-2018 Shintaro Fujiwara" 
 echo "All rights reserved."
 echo 
 echo "Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution"
 echo "Just run scripts and you can make your own Linux Distribution."
 echo ""
-echo "This version is based on Linux From Scratch: Version 8.1-systemd"
+echo "This version is based on Linux From Scratch: Version 8.2-systemd"
 echo "which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K."
-echo "Copyright © 1999-2017 Gerard Beekmans"
-echo "# # Copyright © 1999-2017, Gerard Beekmans"
+echo "Copyright © 1999-2018 Gerard Beekmans"
+echo "# # Copyright © 1999-2018, Gerard Beekmans"
 echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
@@ -31,7 +31,7 @@ previous_command_succeeded
 echo "Are you ready for installing M4?"
 yes_or_no
 ##
-tar xvf ${M4}.tar.xz 
+${M4_TAR}
 previous_command_succeeded
 cd ${M4} 
 previous_command_succeeded
@@ -57,7 +57,7 @@ previous_command_succeeded
 echo "Are you ready for installing Bc?"
 yes_or_no
 ##
-tar xzvf ${BC}.tar.gz
+${BC_TAR}
 previous_command_succeeded
 cd ${BC} 
 previous_command_succeeded
@@ -107,7 +107,7 @@ previous_command_succeeded
 echo "Are you ready for installing Binutils ?"
 yes_or_no
 ##
-tar xjvf ${BINUTILS}.tar.bz2
+${BINUTILS_TAR}
 previous_command_succeeded
 cd ${BINUTILS} 
 previous_command_succeeded
@@ -130,6 +130,7 @@ previous_command_succeeded
              --enable-plugins \
              --enable-shared \
              --disable-werror \
+             --enable-64-bit-bfd \
              --with-system-zlib
 previous_command_succeeded
 ##
@@ -154,7 +155,7 @@ backto_source_dir_part3
 echo "Are you ready for installing GMP?"
 yes_or_no
 ##
-tar xvf ${GMP}.tar.xz 
+${GMP_TAR}
 previous_command_succeeded
 cd  ${GMP} 
 previous_command_succeeded
@@ -191,7 +192,7 @@ previous_command_succeeded
 echo "Are you ready for installing MPFR?"
 yes_or_no
 ##
-tar xvf ${MPFR}.tar.xz 
+${MPFR_TAR}
 previous_command_succeeded
 cd ${MPFR} 
 previous_command_succeeded
@@ -227,7 +228,7 @@ previous_command_succeeded
 echo "Are you ready for installing MPC?"
 yes_or_no
 ##
-tar zxvf ${MPC}.tar.gz
+${MPC_TAR}
 previous_command_succeeded
 cd ${MPC} 
 previous_command_succeeded
@@ -262,7 +263,7 @@ previous_command_succeeded
 echo "Are you ready for installing GCC?"
 yes_or_no
 ##
-tar xvf ${GCC}.tar.xz
+${GCC_TAR}
 previous_command_succeeded
 cd ${GCC} 
 previous_command_succeeded
@@ -320,16 +321,16 @@ echo 'int main(){}' > dummy.c
 cc dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ': /lib'
 ##
-echo "Can you read \"[Requesting program interpreter: /lib/ld-linux.so.2]\"(it would be ...64)?"
+echo "Can you read \"[Requesting program interpreter: /lib/ld-linux-x86-64.so.2]\"?"
 ##
 yes_or_no
 ##
 grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log
 ##
 echo "Can you read these 3 lines?"
-echo "/usr/lib/gcc/i686-pc-linux-gnu/<version>/../../../crt1.o succeeded"
-echo "/usr/lib/gcc/i686-pc-linux-gnu/<version>/../../../crti.o succeeded"
-echo "/usr/lib/gcc/i686-pc-linux-gnu/<version>/../../../crtn.o succeeded"
+echo "/usr/lib/gcc/i686-pc-linux-gnu/${GCC_VERSION}/../../../crt1.o succeeded"
+echo "/usr/lib/gcc/i686-pc-linux-gnu/${GCC_VERSION}/../../../crti.o succeeded"
+echo "/usr/lib/gcc/i686-pc-linux-gnu/${GCC_VERSION}/../../../crtn.o succeeded"
 ##
 yes_or_no
 ##
@@ -340,14 +341,23 @@ echo "Can you read these lines? "
 echo ""
 
 echo "#include <...> search starts here:"
-echo " /usr/lib/gcc/i686-pc-linux-gnu/<version>/include"
+echo " /usr/lib/gcc/x86_64-pc-linux-gnu/${GCC_VERSION}/include"
 echo " /usr/local/include"
-echo " /usr/lib/gcc/i686-pc-linux-gnu/<version>/include-fixed"
+echo " /usr/lib/gcc/x86_64-pc-linux-gnu/${GCC_VERSION}/include-fixed"
 echo " /usr/include"
 yes_or_no
 ##
 grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g'
 ##
+echo "Can you read these lines(64-bit)?"
+echo "SEARCH_DIR(\"/usr/x86_64-pc-linux-gnu/lib64\")"
+echo "SEARCH_DIR(\"/usr/local/lib64\")"
+echo "SEARCH_DIR(\"/lib64\")"
+echo "SEARCH_DIR(\"/usr/lib64\")"
+echo "SEARCH_DIR(\"/usr/x86_64-pc-linux-gnu/lib\")"
+echo "SEARCH_DIR(\"/usr/local/lib\")"
+echo "SEARCH_DIR(\"/lib\")"
+echo "SEARCH_DIR(\"/usr/lib\");"
 echo ""
 echo "Can you read these lines(32-bit)?"
 echo "SEARCH_DIR(\"/usr/i686-pc-linux-gnu/lib32\")"
@@ -359,26 +369,17 @@ echo "SEARCH_DIR(\"/usr/local/lib\")"
 echo "SEARCH_DIR(\"/lib\")"
 echo "SEARCH_DIR(\"/usr/lib\");"
 echo ""
-echo "Can you read these lines(64-bit)?"
-echo "SEARCH_DIR(\"/usr/x86_64-unknown-linux-gnu/lib64\")"
-echo "SEARCH_DIR(\"/usr/local/lib64\")"
-echo "SEARCH_DIR(\"/lib64\")"
-echo "SEARCH_DIR(\"/usr/lib64\")"
-echo "SEARCH_DIR(\"/usr/x86_64-unknown-linux-gnu/lib\")"
-echo "SEARCH_DIR(\"/usr/local/lib\")"
-echo "SEARCH_DIR(\"/lib\")"
-echo "SEARCH_DIR(\"/usr/lib\");"
 ##
 yes_or_no
 ##
 grep "/lib.*/libc.so.6 " dummy.log
 ##
-echo "Can you see \"attempt to open /lib/libc.so.6 succeeded\"(it would be ...64)?"
+echo "Can you see \"attempt to open /lib/libc.so.6 succeeded\"?"
 yes_or_no
 ##
 grep found dummy.log
 ##
-echo "Can you see \"found ld-linux.so.2 at /lib/ld-linux.so.2\"(it would be ...64)?"
+echo "Can you see \"found ld-linux-x86-64.so.2 at /lib/ld-linux-x86-64.so.2\"?"
 yes_or_no
 ##
 rm -v dummy.c a.out dummy.log

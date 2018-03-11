@@ -1,17 +1,17 @@
 
 echo "############################################################################################"
-echo "Pink Rabbit Linux 8.1"
+echo "Pink Rabbit Linux 8.2"
 echo 
-echo "Copyright(C)2016-2017 Shintaro Fujiwara" 
+echo "Copyright(C)2016-2018 Shintaro Fujiwara" 
 echo "All rights reserved."
 echo 
 echo "Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution"
 echo "Just run scripts and you can make your own Linux Distribution."
 echo ""
-echo "This version is based on Linux From Scratch: Version 8.1-systemd"
+echo "This version is based on Linux From Scratch: Version 8.2-systemd"
 echo "which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K."
-echo "Copyright © 1999-2017 Gerard Beekmans"
-echo "# # Copyright © 1999-2017, Gerard Beekmans"
+echo "Copyright © 1999-2018 Gerard Beekmans"
+echo "# # Copyright © 1999-2018, Gerard Beekmans"
 echo "This Distribution is licensed under a Creative Commons License."
 echo "Computer instructions may be extracted from this Distribution under the MIT License."
 echo "Linux® is a registered trademark of Linus Torvalds."
@@ -26,9 +26,11 @@ ANS=""
 ANS2=""
 SWAP=""
 PID="$$"
-####Chapter 2. Preparing a New Partition
+##Part II. Preparing for the Build 
+####Chapter 2 Preparing the Host System 
+####2.5. Creating a File System on the Partition 
 echo
-echo "Are you ready for going to Chapter 2. Preparing a New Partition ?"
+echo "Are you ready for going to Chapter 2. Preparing the Host System ?"
 yes_or_no
 echo
 echo "Are you ready for making filesystem anew?"
@@ -49,11 +51,21 @@ fi
 previous_command_succeeded
 ls -la /dev/$SWAP
 previous_command_succeeded
-####2.4. Mounting the New Partition
+
+####2.6. Setting The $LFS Variable
+echo
+echo "Are you ready for going to 2.5. Setting The $LFS Variable?"
+yes_or_no
+export LFS=/mnt/lfs
+##
+echo $LFS
+##
+
+####2.7. Mounting the New Partition 
 echo
 echo "Are you ready for mounting new partition?"
 yes_or_no
-export LFS=/mnt/lfs
+#export LFS=/mnt/lfs
 if [ -d $LFS ]; then
   echo "$LFS exists"
   echo "Deleting $LFS and making it again"
@@ -73,18 +85,11 @@ previous_command_succeeded
 echo
 echo "Are you ready for swapon?"
 yes_or_no
-#/sbin/swapoff /dev/$SWAP
-#previous_command_succeeded
 /sbin/swapon -v /dev/$SWAP
 previous_command_succeeded
-##
-####2.5. Setting The $LFS Variable
-echo
-echo "Are you ready for going to 2.5. Setting The $LFS Variable?"
-yes_or_no
-export LFS=/mnt/lfs
-##
-echo $LFS
+
+####Chapter 3 Packages and Patches 
+####3.1. Introduction 
 ##
 if [ -d $LFS/sources ]; then
   echo "$LFS/sources exists"
@@ -101,8 +106,9 @@ previous_command_succeeded
 echo
 echo "Are you ready for downloading files needed for LFS ?"
 yes_or_no
-get_needed_files
+###################################get_needed_files
 previous_command_succeeded
+
 ####Chapter 4. Final Preparations
 echo
 echo "Are you ready for going to Chapter 4. Final Preparations?"
@@ -126,6 +132,7 @@ fi
 ln -sv $LFS/tools /
 previous_command_succeeded
 ##
+##4.3. Adding the LFS User 
 id -u lfs >/dev/null
 if [ $? -eq 0 ]; then
   echo "user lfs exists"
