@@ -1,20 +1,18 @@
-############################################################################################
-# Pink Rabbit Linux 8.2
+Pink Rabbit Linux 8.2
  
-# Copyright(C)2016-2018 Shintaro Fujiwara
-# All rights reserved.
+Copyright(C)2016-2018 Shintaro Fujiwara
+All rights reserved.
  
-# Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution
-# Just run scripts and you can make your own Linux Distribution.
+Pink Rabbit Linux is a distribution which facilitates making your own Linux Distribution
+Just run scripts and you can make your own Linux Distribution.
 
-# This version is based on Linux From Scratch: Version 8.2-systemd
-# which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K.
+This version is based on Linux From Scratch: Version 8.2-systemd
+which had been Created by Gerard Beekmans and Edited by Matthew Burgess and Armin K.
 
-# # Copyright © 1999-2018, Gerard Beekman
-# This Distribution is licensed under a Creative Commons License.
-# Computer instructions may be extracted from this Distribution under the MIT License.
-# Linux® is a registered trademark of Linus Torvalds
-############################################################################################
+Copyright © 1999-2018, Gerard Beekman
+This Distribution is licensed under a Creative Commons License.
+Computer instructions may be extracted from this Distribution under the MIT License.
+Linux® is a registered trademark of Linus Torvalds
 
 Execute ./AUTOSTART in each directory
 
