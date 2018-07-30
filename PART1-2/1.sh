@@ -106,7 +106,7 @@ previous_command_succeeded
 echo
 echo "Are you ready for downloading files needed for LFS ?"
 yes_or_no
-###################################get_needed_files
+get_needed_files
 previous_command_succeeded
 
 ####Chapter 4. Final Preparations
